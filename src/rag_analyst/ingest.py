@@ -12,6 +12,7 @@ from .config import (
     CHUNK_SIZE,
     DATA_DIR,
     ENCODING_NAME,
+    OPENAI_API_KEY,
     OPENAI_BASE_URL,
     PDF_FILENAME,
 )
@@ -42,7 +43,7 @@ def build_vectorstore(document_chunks: list | None = None) -> Chroma:
         document_chunks = chunk_documents()
 
     embedding_model = OpenAIEmbeddings(
-        openai_api_key=None,  # Uses OPENAI_API_KEY env var
+        openai_api_key=OPENAI_API_KEY,
         openai_api_base=OPENAI_BASE_URL,
     )
 
