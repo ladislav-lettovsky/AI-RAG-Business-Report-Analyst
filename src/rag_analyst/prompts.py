@@ -1,7 +1,4 @@
-"""System prompts for LLM and RAG response modes.
-
-Copied VERBATIM from the notebook.
-"""
+"""System prompts for LLM and RAG response modes."""
 
 # LLM System Prompt (used by eng_response)
 LLM_SYSTEM_PROMPT = """

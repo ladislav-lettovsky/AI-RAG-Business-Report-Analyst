@@ -29,8 +29,8 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--mode",
-        choices=["raw", "engineered", "rag", "all"],
-        default="all",
+        choices=["raw_response", "eng_response", "rag_response", "all_responses"],
+        default="all_responses",
         help="Response mode (default: all — runs all 3 for comparison)",
     )
     parser.add_argument(
@@ -85,14 +85,14 @@ def _run_modes(
 ) -> list[dict]:
     """Run selected mode(s) for a single question and return results."""
     results: list[dict] = []
-    modes = ["raw", "engineered", "rag"] if mode == "all" else [mode]
+    modes = ["raw_response", "eng_response", "rag_response"] if mode == "all_responses" else [mode]
 
     for m in modes:
-        logger.info("Running %s mode for: %s", m, question[:60])
+        logger.info("Running %s mode for: %s", m, question)
 
-        if m == "raw":
+        if m == "raw_response":
             resp = llm_response(question)
-        elif m == "engineered":
+        elif m == "eng_response":
             resp = eng_response(question)
         else:
             resp = rag_response(question, vectorstore, document_chunks, k=k)
@@ -144,8 +144,8 @@ def main(argv: list[str] | None = None) -> None:
 
         # Print inline
         for r in results:
-            print(f"\n[{r['mode'].upper()}] {r['question'][:60]}...")
-            print(r["response"][:500])
+            print(f"\n[{r['mode'].upper()}] {r['question']}...")
+            print(r["response"])
             if "evaluation" in r:
                 print(f"Evaluation: {r['evaluation']}")
 
