@@ -16,7 +16,7 @@ def _get_evaluate_llm() -> ChatOpenAI:
     if _evaluate_llm is None:
         _evaluate_llm = ChatOpenAI(
             model_name=MODEL_EVALUATION,
-            base_url=OPENAI_BASE_URL,
+            base_url=OPENAI_BASE_URL,  # ty: ignore[unknown-argument]
         )
     return _evaluate_llm
 
@@ -45,4 +45,11 @@ def response_evaluation(content: str, question: str, response: str) -> str:
 
     """
     llm = _get_evaluate_llm()
-    return llm.invoke([HumanMessage(content=evaluation_prompt)]).content.strip()
+    raw_content = llm.invoke([HumanMessage(content=evaluation_prompt)]).content
+    # LangChain can return structured content (list of parts); flatten to string
+    text = (
+        " ".join(str(part) for part in raw_content)
+        if isinstance(raw_content, list)
+        else raw_content
+    )
+    return text.strip()

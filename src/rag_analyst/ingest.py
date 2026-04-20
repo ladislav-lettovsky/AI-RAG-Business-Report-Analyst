@@ -53,8 +53,8 @@ def build_vectorstore(document_chunks: list | None = None) -> Chroma:
         document_chunks = chunk_documents()
 
     embedding_model = OpenAIEmbeddings(
-        api_key=OPENAI_API_KEY,
-        base_url=OPENAI_BASE_URL,
+        api_key=OPENAI_API_KEY,  # ty: ignore[unknown-argument]
+        base_url=OPENAI_BASE_URL,  # ty: ignore[unknown-argument]
     )
 
     return Chroma.from_documents(document_chunks, embedding_model)

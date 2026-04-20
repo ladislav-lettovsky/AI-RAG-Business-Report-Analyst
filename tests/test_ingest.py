@@ -35,6 +35,4 @@ class TestChunkDocuments:
         for chunk in chunks:
             token_count = len(enc.encode(chunk.page_content))
             # Allow some slack above chunk_size (256) due to splitter behavior
-            assert token_count < 512, (
-                f"Chunk has {token_count} tokens, expected < 512"
-            )
+            assert token_count < 512, f"Chunk has {token_count} tokens, expected < 512"

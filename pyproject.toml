@@ -5,6 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "rag-analyst"
 version = "1.0.0"
+description = "RAG-powered business report analyst comparing raw LLM vs prompt-engineered vs grounded retrieval"
 requires-python = ">=3.12"
 dependencies = [
     "langchain>=1.2,<2",
@@ -23,9 +24,11 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    "pre-commit>=4.0",
     "pytest>=8.0",
     "pytest-cov>=5.0",
-    "nbstripout>=0.7",
+    "ruff>=0.15.10",
+    "ty>=0.0.30",
 ]
 
 [project.scripts]
@@ -37,3 +40,18 @@ packages = ["src/rag_analyst"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+markers = [
+    "integration: marks tests as integration tests requiring live LLM APIs (deselect with '-m not integration')",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
