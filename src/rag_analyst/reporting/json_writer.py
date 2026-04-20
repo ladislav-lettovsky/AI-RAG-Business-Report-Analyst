@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from ..config import MODEL_EVALUATION, MODEL_GENERATION, RESULTS_DIR
@@ -30,11 +30,11 @@ def write_json_results(
     output_dir = output_dir or RESULTS_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
     filepath = output_dir / f"run_{timestamp}.json"
 
     payload = {
-        "run_timestamp": datetime.now(timezone.utc).isoformat(),
+        "run_timestamp": datetime.now(UTC).isoformat(),
         "config": {
             "model_generation": MODEL_GENERATION,
             "model_evaluation": MODEL_EVALUATION,

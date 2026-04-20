@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import logging
-import sys
 from pathlib import Path
 
 from .config import RESULTS_DIR, SIMILARITY_K
@@ -18,8 +17,14 @@ logger = logging.getLogger(__name__)
 
 TEST_QUESTIONS = [
     {"question": "Who are the authors of this article and who published this article?", "k": 6},
-    {"question": "List down the three leadership characteristics in bulleted points and explain each one of the characteristics under two lines.", "k": 3},
-    {"question": "Can you explain specific examples from the article where Apple's approach to leadership has led to successful innovations?", "k": 3},
+    {
+        "question": "List down the three leadership characteristics in bulleted points and explain each one of the characteristics under two lines.",
+        "k": 3,
+    },
+    {
+        "question": "Can you explain specific examples from the article where Apple's approach to leadership has led to successful innovations?",
+        "k": 3,
+    },
 ]
 
 
@@ -35,7 +40,8 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Response mode (default: all — runs all 3 for comparison)",
     )
     parser.add_argument(
-        "--query", "-q",
+        "--query",
+        "-q",
         type=str,
         default=None,
         help="Custom query (default: run built-in 3 questions)",
@@ -68,7 +74,8 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Show terminal comparison report",
     )
     parser.add_argument(
-        "--verbose", "-v",
+        "--verbose",
+        "-v",
         action="store_true",
         help="Set log level to DEBUG",
     )
@@ -126,17 +133,14 @@ def main(argv: list[str] | None = None) -> None:
     vectorstore = build_vectorstore(document_chunks)
 
     # --- Questions ---
-    if args.query:
-        questions = [{"question": args.query, "k": args.k}]
-    else:
-        questions = TEST_QUESTIONS
+    questions = [{"question": args.query, "k": args.k}] if args.query else TEST_QUESTIONS
 
     # --- Run ---
     all_results: list[dict] = []
     for q in questions:
         k = q.get("k", args.k)
         results = _run_modes(
-            question=q["question"],
+            question=str(q["question"]),
             mode=args.mode,
             vectorstore=vectorstore,
             document_chunks=document_chunks,

@@ -17,8 +17,12 @@ os.environ.setdefault("TQDM_DISABLE", "1")
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-DATA_DIR: Path = Path(os.environ.get("DATA_DIR", Path(__file__).resolve().parent.parent.parent / "data"))
-RESULTS_DIR: Path = Path(os.environ.get("RESULTS_DIR", Path(__file__).resolve().parent.parent.parent / "results"))
+DATA_DIR: Path = Path(
+    os.environ.get("DATA_DIR", Path(__file__).resolve().parent.parent.parent / "data")
+)
+RESULTS_DIR: Path = Path(
+    os.environ.get("RESULTS_DIR", Path(__file__).resolve().parent.parent.parent / "results")
+)
 
 PDF_FILENAME: str = os.environ.get("PDF_FILENAME", "HBR_How_Apple_Is_Organized_For_Innovation.pdf")
 

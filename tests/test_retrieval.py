@@ -24,9 +24,7 @@ class TestRetrieval:
     def test_retrieve_context_returns_string(self):
         from rag_analyst.retrieval import retrieve_context
 
-        context = retrieve_context(
-            "Who are the authors?", self.vectorstore, self.document_chunks
-        )
+        context = retrieve_context("Who are the authors?", self.vectorstore, self.document_chunks)
         assert isinstance(context, str)
         assert len(context) > 0
 
@@ -34,7 +32,5 @@ class TestRetrieval:
         from rag_analyst.retrieval import retrieve_context
 
         first_chunk_content = self.document_chunks[0].page_content
-        context = retrieve_context(
-            "What is innovation?", self.vectorstore, self.document_chunks
-        )
+        context = retrieve_context("What is innovation?", self.vectorstore, self.document_chunks)
         assert first_chunk_content in context
