@@ -7,7 +7,7 @@ A Retrieval-Augmented Generation (RAG) application that enables business analyst
 
 ## Architecture
 
-```
+```text
 PDF → Load (PyMuPDF) → Chunk (256 tokens) → Embed (OpenAI) → ChromaDB → Retrieve (top-k) → LLM (GPT-4o-mini) → Response
 ```
 
@@ -29,7 +29,7 @@ Responses are scored by GPT-4o on two dimensions (0.0–1.0 scale):
 ## Results
 
 | Question | Raw LLM | Prompt-Engineered | RAG |
-|----------|---------|-------------------|-----|
+| --- | --- | --- | --- |
 | Q1: Authors & publisher | 0.0 / 0.0 | 0.0 / 0.0 | **1.0 / 1.0** |
 | Q2: Leadership characteristics | 0.0 / 0.0 | 0.0 / 0.0 | **1.0 / 1.0** |
 | Q3: Innovation examples | 0.2 / 0.3 | 0.2 / 0.3 | **0.7 / 0.6** |
@@ -97,7 +97,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full development workflow.
 
 ## Project Structure
 
-```
+```text
 ai-rag-knowledge-analyst/
 ├── src/
 │   └── rag_analyst/                   # Production Python package (src layout)
@@ -153,10 +153,12 @@ ai-rag-knowledge-analyst/
 ## License & Acknowledgments
 
 ### Source code
+
 The source code in this repository is released under the [MIT License](LICENSE).
 Copyright (c) 2026 Ladislav Lettovsky.
 
 ### Data
+
 The file under `data/` — `HBR_How_Apple_Is_Organized_For_Innovation.pdf`
 ("How Apple is Organized for Innovation" by Joel M. Podolny and Morten T. Hansen,
 Harvard Business Review, Nov–Dec 2020) — is a third-party article included
@@ -165,6 +167,7 @@ the MIT License and is **not** covered by the copyright notice above. All
 rights remain with the original authors and publisher.
 
 ### Built with
+
 - [LangChain](https://github.com/langchain-ai/langchain) — LLM orchestration framework
 - [ChromaDB](https://github.com/chroma-core/chroma) — embedding vector store
 - [OpenAI](https://openai.com/) — underlying LLMs

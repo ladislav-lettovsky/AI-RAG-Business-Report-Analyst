@@ -1,6 +1,7 @@
 # ai-rag-knowledge-analyst — AI Agent Memory
 
 ## What this is
+
 A RAG (retrieval-augmented generation) pipeline that compares **three answering
 strategies** side-by-side on the same question against a source document (Harvard
 Business Review article on Apple's innovation organization):
@@ -16,6 +17,7 @@ can be emitted to the terminal or written to timestamped JSON for longitudinal
 analysis.
 
 ## Stack
+
 - Python 3.12+, `uv` for dependency management, `just` as the task runner
 - LangChain 1.x (`langchain`, `langchain-classic`, `langchain-community`,
   `langchain-openai`, `langchain-text-splitters`)
@@ -28,6 +30,7 @@ analysis.
 - Linting: ruff; Type checking: `ty` (Astral); Pre-commit hooks enabled (10 hooks)
 
 ## Commands you can run without asking
+
 - `just fmt` — format code (ruff format)
 - `just lint` / `just lint-fix` — ruff check, optionally with --fix
 - `just type` — `uv run ty check`
@@ -42,12 +45,14 @@ analysis.
 - Read-only git: `git status`, `git diff`, `git log`, `git branch`
 
 ## Commands with preconditions
+
 - `git commit` is allowed on a non-`main` branch **only after `just check`
   passes with no errors**. A pre-commit hook (`no-commit-to-branch`) blocks
   direct commits to `main`/`master`; escape only with explicit
   `SKIP=no-commit-to-branch` and a good reason.
 
 ## Commands that need explicit approval
+
 - `uv add`, `uv remove` (dependency changes)
 - `git push`, `git reset --hard`
 - `gh pr create`, `gh pr merge`
@@ -97,6 +102,7 @@ analysis.
    — that code legitimately writes to stdout for end-user display.
 
 ## Where things live
+
 - `src/rag_analyst/` — production package (src layout)
   - `config.py` — centralized settings from env vars (paths, models, chunking,
     sampling, API keys/base URL)
@@ -119,6 +125,7 @@ analysis.
 - `.scratch/` — ephemeral work zone (git-ignored except `.gitkeep`)
 
 ## RAG conventions for this repo
+
 - **Retrieval returns a single joined string** (not a list of Documents).
   Callers in `response.py` inject it directly into the RAG prompt. If you
   want structured retrieval output, add a new function — don't change the
@@ -132,6 +139,7 @@ analysis.
   try to rewrite around them.
 
 ## Testing conventions
+
 - Deterministic tests (no API) live in `tests/test_ingest.py` and run in CI.
 - API-gated tests (`test_retrieval.py`, `test_response.py`,
   `test_evaluation.py`) set
@@ -145,6 +153,7 @@ analysis.
   LLM-backed paths, mock `invoke()` / `.chat.completions.create()` returns.
 
 ## Type checking with `ty`
+
 - To suppress a finding: `# ty: ignore[<rule-name>]` — the rule name comes
   from the ty diagnostic header (e.g., `unknown-argument`,
   `invalid-argument-type`, `unresolved-attribute`).
@@ -155,6 +164,7 @@ analysis.
     at the call site (see `evaluation.py` for the pattern).
 
 ## Ephemeral / scratch work
+
 Use `.scratch/` at the repo root for any exploratory, diagnostic, or
 throwaway work — quick Python snippets, draft prompts, debug traces,
 retrieval experiments, or scratch notes. The directory is git-ignored
@@ -166,11 +176,13 @@ retrieval experiments, or scratch notes. The directory is git-ignored
 - Clean up periodically (nothing persists beyond your working session)
 
 Examples of good `.scratch/` use:
+
 - `.scratch/try_new_chunking.py` — testing a different splitter config
 - `.scratch/inspect_retrieval.py` — dumping top-k for a query to eyeball ranking
 - `.scratch/prompt_v3.md` — drafting a new system-prompt variant before promoting
 
 ## Before saying "done"
+
 1. `just check` passes (pre-commit + ty + pytest; 5 passed, 7 skipped is the
    expected baseline without an API key)
 2. Any new public function has a test and a type-annotated signature
