@@ -7,7 +7,7 @@ A Retrieval-Augmented Generation (RAG) application that enables business analyst
 
 ## Architecture
 
-```
+```text
 PDF → Load (PyMuPDF) → Chunk (256 tokens) → Embed (OpenAI) → ChromaDB → Retrieve (top-k) → LLM (GPT-4o-mini) → Response
 ```
 
@@ -97,7 +97,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full development workflow.
 
 ## Project Structure
 
-```
+```text
 ai-rag-knowledge-analyst/
 ├── src/
 │   └── rag_analyst/                   # Production Python package (src layout)
