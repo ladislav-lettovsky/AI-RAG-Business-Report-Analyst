@@ -41,15 +41,17 @@ Thank you for your interest in contributing to the AI RAG Knowledge Analyst.
 - Write code following existing patterns in `src/rag_analyst/`.
 - Add or update tests in `tests/`.
 - Run the full quality gate before committing:
+
   ```bash
   just check
   ```
+
   This is the same command CI runs — pre-commit hooks + `ty check` + `pytest`.
 
 ## Project Layout
 
 | Directory | Purpose |
-|-----------|---------|
+| --- | --- |
 | `src/rag_analyst/` | Main package source code |
 | `src/rag_analyst/reporting/` | JSON and terminal output formatters |
 | `tests/` | Pytest test suite |
@@ -85,7 +87,7 @@ OPENAI_API_KEY=your-key just test
 ## Test Suite Overview
 
 | File | Coverage | API Key Required |
-|------|----------|-----------------|
+| --- | --- | --- |
 | `test_ingest.py` | PDF loading, chunking, token size | No |
 | `test_retrieval.py` | Vector store, similarity search, first-chunk injection | Yes (auto-skip) |
 | `test_response.py` | Raw LLM, engineered, RAG responses | Yes (auto-skip) |

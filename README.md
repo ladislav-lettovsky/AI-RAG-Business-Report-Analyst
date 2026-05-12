@@ -29,7 +29,7 @@ Responses are scored by GPT-4o on two dimensions (0.0–1.0 scale):
 ## Results
 
 | Question | Raw LLM | Prompt-Engineered | RAG |
-|----------|---------|-------------------|-----|
+| --- | --- | --- | --- |
 | Q1: Authors & publisher | 0.0 / 0.0 | 0.0 / 0.0 | **1.0 / 1.0** |
 | Q2: Leadership characteristics | 0.0 / 0.0 | 0.0 / 0.0 | **1.0 / 1.0** |
 | Q3: Innovation examples | 0.2 / 0.3 | 0.2 / 0.3 | **0.7 / 0.6** |
