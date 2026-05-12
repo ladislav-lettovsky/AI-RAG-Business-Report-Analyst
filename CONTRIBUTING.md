@@ -4,43 +4,43 @@ Thank you for your interest in contributing to the AI RAG Knowledge Analyst.
 
 ## Getting Started
 
-1. **Fork** the repository and clone your fork:
+**1. Fork** the repository and clone your fork:
 
-   ```bash
-   git clone https://github.com/<your-username>/ai-rag-knowledge-analyst.git
-   cd ai-rag-knowledge-analyst
-   ```
+```bash
+git clone https://github.com/<your-username>/ai-rag-knowledge-analyst.git
+cd ai-rag-knowledge-analyst
+```
 
-2. **Create a virtual environment** and install dependencies:
+**2. Create a virtual environment** and install dependencies:
 
-   ```bash
-   uv venv .venv
-   source .venv/bin/activate
-   uv sync --extra dev
-   ```
+```bash
+uv venv .venv
+source .venv/bin/activate
+uv sync --extra dev
+```
 
-3. **Set up your environment**:
+**3. Set up your environment**:
 
-   ```bash
-   cp .env.example .env
-   # Edit .env with your OPENAI_API_KEY
-   ```
+```bash
+cp .env.example .env
+# Edit .env with your OPENAI_API_KEY
+```
 
-4. **Install pre-commit hooks** (once per clone):
+**4. Install pre-commit hooks** (once per clone):
 
-   ```bash
-   just install-hooks
-   ```
+```bash
+just install-hooks
+```
 
-   This registers the 10 hooks defined in `.pre-commit-config.yaml` so they
-   run automatically on every `git commit`. They include ruff, ruff-format,
-   `ty` type checking, and a guard against committing directly to `main`.
+This registers the 10 hooks defined in `.pre-commit-config.yaml` so they
+run automatically on every `git commit`. They include ruff, ruff-format,
+`ty` type checking, and a guard against committing directly to `main`.
 
-5. **Create a feature branch**:
+**5. Create a feature branch**:
 
-   ```bash
-   git switch -c feat/your-feature-name
-   ```
+```bash
+git switch -c feat/your-feature-name
+```
 
 ## Development Workflow
 
@@ -48,11 +48,11 @@ Thank you for your interest in contributing to the AI RAG Knowledge Analyst.
 - Add or update tests in `tests/`.
 - Run the full quality gate before committing:
 
-  ```bash
-  just check
-  ```
+```bash
+just check
+```
 
-  This is the same command CI runs — pre-commit hooks + `ty check` + `pytest`.
+This is the same command CI runs — pre-commit hooks + `ty check` + `pytest`.
 
 ## Project Layout
 
