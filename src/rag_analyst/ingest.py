@@ -39,11 +39,13 @@ def chunk_documents(pages: list | None = None) -> list:
         pdf_path = DATA_DIR / PDF_FILENAME
         loader = PyMuPDFLoader(str(pdf_path))
         pages = loader.load()
+
     text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
         encoding_name=ENCODING_NAME,
         chunk_size=CHUNK_SIZE,
         chunk_overlap=CHUNK_OVERLAP,
     )
+
     return text_splitter.split_documents(pages)
 
 
