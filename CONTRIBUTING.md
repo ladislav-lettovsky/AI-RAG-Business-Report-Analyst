@@ -5,12 +5,14 @@ Thank you for your interest in contributing to the AI RAG Knowledge Analyst.
 ## Getting Started
 
 1. **Fork** the repository and clone your fork:
+
    ```bash
    git clone https://github.com/<your-username>/ai-rag-knowledge-analyst.git
    cd ai-rag-knowledge-analyst
    ```
 
 2. **Create a virtual environment** and install dependencies:
+
    ```bash
    uv venv .venv
    source .venv/bin/activate
@@ -18,20 +20,24 @@ Thank you for your interest in contributing to the AI RAG Knowledge Analyst.
    ```
 
 3. **Set up your environment**:
+
    ```bash
    cp .env.example .env
    # Edit .env with your OPENAI_API_KEY
    ```
 
 4. **Install pre-commit hooks** (once per clone):
+
    ```bash
    just install-hooks
    ```
+
    This registers the 10 hooks defined in `.pre-commit-config.yaml` so they
    run automatically on every `git commit`. They include ruff, ruff-format,
    `ty` type checking, and a guard against committing directly to `main`.
 
 5. **Create a feature branch**:
+
    ```bash
    git switch -c feat/your-feature-name
    ```
@@ -75,11 +81,13 @@ Thank you for your interest in contributing to the AI RAG Knowledge Analyst.
 ## Running Tests
 
 Deterministic tests only (no API key — what CI runs):
+
 ```bash
 just test
 ```
 
 All tests including API-gated (requires `OPENAI_API_KEY`):
+
 ```bash
 OPENAI_API_KEY=your-key just test
 ```
