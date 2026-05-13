@@ -11,13 +11,17 @@ git clone https://github.com/<your-username>/ai-rag-knowledge-analyst.git
 cd ai-rag-knowledge-analyst
 ```
 
-**2. Create a virtual environment** and install dependencies:
+**2. Rehydrate the checkout** — sync dev dependencies and install pre-commit hooks:
 
 ```bash
-uv venv .venv
-source .venv/bin/activate
-uv sync --extra dev
+just refresh
 ```
+
+`just refresh` is the canonical setup command. Run it after a fresh clone,
+after `git worktree add`, or after pulling a branch that changed `pyproject.toml`
+or `uv.lock`. Under the hood it runs `uv sync --extra dev` and
+`uv run pre-commit install`. Equivalent to `uv sync --extra dev` plus
+`just install-hooks`.
 
 **3. Set up your environment**:
 
@@ -26,21 +30,21 @@ cp .env.example .env
 # Edit .env with your OPENAI_API_KEY
 ```
 
-**4. Install pre-commit hooks** (once per clone):
-
-```bash
-just install-hooks
-```
-
-This registers the 10 hooks defined in `.pre-commit-config.yaml` so they
-run automatically on every `git commit`. They include ruff, ruff-format,
-`ty` type checking, and a guard against committing directly to `main`.
-
-**5. Create a feature branch**:
+**4. Create a feature branch**:
 
 ```bash
 git switch -c feat/your-feature-name
 ```
+
+## Per-checkout virtual environments
+
+The `.venv` directory is git-ignored and lives inside each checkout. A new
+`git worktree add` produces a worktree with **no** `.venv` until you run
+`just refresh` there.
+
+The 10 hooks in `.pre-commit-config.yaml` (ruff, ruff-format, `ty`, hygiene,
+`no-commit-to-branch`, etc.) are installed by `just refresh`. If hooks get out
+of sync after a tooling upgrade, run `just refresh` again.
 
 ## Development Workflow
 
